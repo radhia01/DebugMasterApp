@@ -17,7 +17,6 @@ function Problem({ currentId, setcurrentId }) {
   const problemMessage = useSelector((state) => state.problem.message);
   const solutionMessage = useSelector((state) => state.solution.message);
   const tagMessage = useSelector((state) => state.tag.message);
-  console.log(problemMessage, solutionMessage, tagMessage);
   const problem = useSelector((state) =>
     currentId
       ? state.problem.problems.filter((el) => el.id === currentId)
@@ -69,7 +68,7 @@ function Problem({ currentId, setcurrentId }) {
 
   useEffect(() => {
     problem && dispatch(getProblemDetails(problem[0].id));
-  }, []);
+  }, [dispatch, problem]);
   useEffect(() => {
     dispatch(Reset_Message());
     dispatch(Reset_Tag_Message());

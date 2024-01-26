@@ -1,24 +1,19 @@
 import { Modal, Col, Row, Form, Button } from "react-bootstrap";
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 // import actions
 import { Reset_Message, Reset_Error } from "../../redux/reducer/user";
 import { updateUserPassword } from "../../redux/actions/user";
 import { updateUser } from "../../redux/actions/user";
-const SettingsModel = ({
-  user,
-  handleChange,
-  handleUpdateUser,
-  UpdatePassword,
-}) => {
+const SettingsModel = ({ user, handleChange, UpdatePassword }) => {
   const dispatch = useDispatch();
   const [localUser, setLocalUser] = useState(user);
-
+  const { message } = useSelector((state) => state.user);
   const [newPassword, setnewPassword] = useState("");
   const [confirmedNewPassword, setconfirmedNewPassword] = useState("");
   const handleLocalChange = (e) => {
     setLocalUser({ ...localUser, [e.target.name]: e.target.value });
-    handleChange(e); // Call the parent handleChange to update user in Profile component
+    handleChange(e);
   };
   const handleUpdate = (e) => {
     e.preventDefault();

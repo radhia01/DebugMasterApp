@@ -14,16 +14,16 @@ function Register() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { message, error, success } = useSelector((state) => state.user);
+  console.log(error);
 
   useEffect(() => {
     dispatch(getUsers());
-  }, []);
+  }, [dispatch]);
   useEffect(() => {
     dispatch(Reset_Message());
-  }, [dispatch]);
-  useEffect(() => {
     dispatch(Reset_Error());
   }, [dispatch]);
+
   const [userDetails, setuserDetails] = useState({
     username: "",
     user_email: "",
@@ -36,15 +36,16 @@ function Register() {
   // function to add new user
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    dispatch(Reset_Error());
     try {
       await dispatch(addUser(userDetails));
-      if (success) navigate("/");
     } catch (error) {
       console.log(error.message);
     }
   };
-
+  useEffect(() => {
+    if (success) navigate("/");
+  }, [success]);
   return (
     <div className="register">
       <div className="navbar">

@@ -16,6 +16,7 @@ function Login() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { error } = useSelector((state) => state.user);
+  console.log(error);
   const [user, setuser] = useState({
     user_email: "",
     user_password: "",
@@ -31,14 +32,9 @@ function Login() {
   useEffect(() => {
     userInfo && navigate("/home");
   }, [userInfo]);
-  useEffect(() => {
-    dispatch(Reset_Error());
-  }, [dispatch]);
 
   useEffect(() => {
-    dispatch(Reset_Message());
-  }, [dispatch]);
-  useEffect(() => {
+    dispatch(Reset_Error());
     dispatch(Reset_Error());
   }, [dispatch]);
   return (

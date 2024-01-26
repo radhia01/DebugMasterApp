@@ -6,26 +6,21 @@ import { useDispatch, useSelector } from "react-redux";
 import Success from "../../components/Success";
 import Error from "../../components/Error";
 import { useNavigate } from "react-router-dom";
-import Problem from "../publication/Problem";
-import ProblemDescription from "../publication/ProblemDescription";
 import SettingsModal from "./UpdateModal";
 // import actions
 import { updateUser } from "../../redux/actions/user";
-import { updateUserPassword } from "../../redux/actions/user";
 import { Reset_Message, Reset_Error } from "../../redux/reducer/user";
 import { getPostedProblems } from "../../redux/actions/user";
 import { getProblems } from "../../redux/actions/problem";
 import { deleteProblem } from "../../redux/actions/problem";
 //
 import HighlightOffIcon from "@mui/icons-material/HighlightOff";
-function Profile({ currentId, setcurrentId }) {
+function Profile({ setcurrentId }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   //
-  const [newPassword, setnewPassword] = useState("");
 
   const { message, error, problems } = useSelector((state) => state.user);
-  const [confirmedNewPassword, setconfirmedNewPassword] = useState("");
   const [showSettings, setshowSettings] = useState(false);
   const [showUpdatePassword, setshowUpdatePassword] = useState(false);
   const [showProfile, setshowProfile] = useState(true);
@@ -34,10 +29,7 @@ function Profile({ currentId, setcurrentId }) {
   const [user, setuser] = useState(
     JSON.parse(localStorage.getItem("userInfo"))
   );
-  console.log(user);
-  const problem = useSelector((state) =>
-    currentId ? state.problem.problems.find((el) => el.id === currentId) : null
-  );
+
   const handleshowSettings = () => {
     setshowSettings(true);
     setshowUpdatePassword(false);
@@ -88,22 +80,6 @@ function Profile({ currentId, setcurrentId }) {
     setuser({ ...user, [e.target.name]: e.target.value });
   };
 
-  const handleUpdatePassword = async (e) => {
-    e.preventDefault();
-    dispatch(Reset_Error());
-    dispatch(Reset_Message());
-    try {
-      await dispatch(
-        updateUserPassword({
-          id: user.id,
-          data: { newPassword, confirmedNewPassword },
-        })
-      );
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   const handleDeleteProblem = async (id) => {
     try {
       dispatch(deleteProblem(id));
@@ -112,17 +88,9 @@ function Profile({ currentId, setcurrentId }) {
   };
   useEffect(() => {
     dispatch(getProblems());
-  }, [dispatch]);
-  useEffect(() => {
-    try {
-      dispatch(Reset_Message());
-      dispatch(Reset_Error());
-    } catch (error) {
-      console.log(error);
-    }
-  }, []);
-  useEffect(() => {
     dispatch(getPostedProblems(user.id));
+    dispatch(Reset_Message());
+    dispatch(Reset_Error());
   }, [dispatch]);
 
   const PostedProblemsModel = () => {

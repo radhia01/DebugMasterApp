@@ -6,7 +6,6 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 // import actions
 import { getProblems, getProblemsByTag } from "../../redux/actions/problem";
-import { updateProblem } from "../../redux/actions/problem";
 import { deleteProblem } from "../../redux/actions/problem";
 import { getTags } from "../../redux/actions/tag";
 //import components
@@ -183,7 +182,12 @@ function ProblemList({ currentId, setcurrentId }) {
               </Col>
             </Col>
 
-            <Col md={4} className="text-white ">
+            <Col
+              md={4}
+              className="text-white border "
+              style={{ minHeight: 200 }}
+            >
+              <Row className="text-black fs-5 fw-bold p-2">Tags</Row>
               <Row className="tags_list">
                 <Col className="m-2" md={3}>
                   <Button className="tag" onClick={getAllProblems}>
