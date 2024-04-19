@@ -1,9 +1,9 @@
 const { Pool } = require("pg");
 const pool = new Pool({
-  host: process.env.HOST || "rajje.db.elephantsql.com",
-  user: process.env.USER || "kihxsvhq",
-  database: process.env.DB_NAME || "kihxsvhq",
-  password: process.env.DB_PASSWORD || "VLozqEc8I2-9FErGzXMTKF4POw6rfLfs",
+  host: process.env.HOST || "berry.db.elephantsql.com",
+  user: process.env.USER || "lrjnfwrf",
+  database: process.env.DB_NAME || "lrjnfwrf",
+  password: process.env.DB_PASSWORD || "SGPAROm398aZ2J8yRFaVEUJcHbO5r9qE",
   port: process.env.DB_PORT || "5432",
 });
 module.exports = pool;

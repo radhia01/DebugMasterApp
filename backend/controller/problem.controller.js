@@ -4,6 +4,7 @@ exports.createProblem = async (req, res) => {
   try {
     const { idUser } = req.params;
     const { problem_titre, problem_description, problem_date } = req.body;
+    console.log(req.body)
     const newProblem = await pool.query(
       "INSERT INTO  problemstDBMASTER (problem_titre, problem_description, problem_date, id_user ) values ($1,$2,$3,$4)  RETURNING * ",
       [problem_titre, problem_description, problem_date, idUser]

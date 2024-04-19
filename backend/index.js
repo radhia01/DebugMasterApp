@@ -6,12 +6,12 @@ dotenv.config();
 app.use(express.json());
 app.use(
   cors({
-    origin: "*",
+    origin: "https://debug-master-react.vercel.app",
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
   })
 );
 app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Origin", "https://debug-master-react.vercel.app");
   res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
   res.header("Access-Control-Allow-Headers", "Content-Type");
   next();
